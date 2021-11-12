@@ -3,6 +3,7 @@ import docx
 from hyperlink import add_hyperlink
 from docx.oxml.ns import qn
 from os.path import abspath, dirname, join
+from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 
 lines = []
 print("Paste job description here and type exit when finished:")
@@ -45,10 +46,11 @@ class Tools:
     def __init__(self, name, github):
         self.name = name
         self.github = github
-        document.add_heading(name, level=1).alignment = 1
+        # Name and link to GitHub front page is centered
+        document.add_heading(name, level=1).alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
         p = document.add_paragraph("GitHub: ")
         add_hyperlink(p, github, github)
-        p.alignment = 1
+        p.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
 
 # The following three functions are made to improve readability of code
 # This is the font used for titles
@@ -67,7 +69,18 @@ class Tools:
     def scan(self, words_lists):
         for items in words_lists:
             for k, v in items:
-                if k in job_desc:
+                if k in ('front', 'html', 'css', 'web'):
+                    p = document.add_paragraph(v, style='List Bullet')
+                    add_hyperlink(p,
+                                  "GitHub Website.",
+                                  "https://kinlonchoi.github.io/Portfolio/index.html")
+                    break
+                elif k in ('python', 'js', 'javascript', 'back'):
+                    add_hyperlink(document.add_paragraph(v, style='List Bullet'),
+                                  "Python Projects",
+                                  "https://github.com/KinLonChoi/Python-Projects")
+                    break
+                elif k in job_desc:
                     self.bullet(v)
                     break
                 else:
@@ -84,16 +97,16 @@ cv.para("I am a highly motivated individual with six years of experience in the 
 # Skills section add dictionary definition for each key words(search terms) with value(skills) to add as bullet point
 cv.title("Skills")
 
-site = document.add_paragraph("GitHub website:", style='List Bullet')
-add_hyperlink(site, "https://kinlonchoi.github.io/Portfolio/index.html",
-              "https://kinlonchoi.github.io/Portfolio/index.html")
+# site = document.add_paragraph("GitHub website:", style='List Bullet')
+# add_hyperlink(site, "https://kinlonchoi.github.io/Portfolio/index.html",
+#               "https://kinlonchoi.github.io/Portfolio/index.html")
 # Words to be searched for in job description
 web = dict.fromkeys(['front', 'html', 'css', 'web'],
                     # if term is found print above as bullet point
-                    "Well-versed in web technologies HTML and CSS with responsive designs using bootstrap framework.")
+                    "Well-versed in web technologies HTML and CSS with responsive designs using bootstrap framework. ")
 
 back = dict.fromkeys(['python', 'js', 'javascript', 'back'],
-                     "Working knowledge of backend languages JavaScript and Python.")
+                     "Working knowledge of backend languages JavaScript and Python. ")
 
 sql = dict.fromkeys(['sql', 'data', 'dbms'],
                     "SQL knowledge using Database Management Software SQLite.")
