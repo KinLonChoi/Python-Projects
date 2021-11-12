@@ -1,4 +1,3 @@
-from docx import Document
 from docx.shared import Pt
 import docx
 from hyperlink import add_hyperlink
@@ -81,6 +80,7 @@ cv.para("I am a highly motivated individual with six years of experience in the 
         "I have self-taught knowledge of coding in both front and backend languages. "
         "I am keen to develop new skills required to become an integral part of a software team.")
 
+
 # Skills section add dictionary definition for each key words(search terms) with value(skills) to add as bullet point
 cv.title("Skills")
 
@@ -158,6 +158,7 @@ employment_list_2 = [x.items() for x in (plan, meet, busy)]
 
 cv.scan(employment_list_2)
 
+
 # Education and Certification section
 cv.title("Education and Certification")
 nothing = document.add_paragraph("", style='List Bullet')
@@ -182,5 +183,6 @@ cv.para("2003-2011		The Bromfords School, Essex 								"
         "A-Levels in Chemistry (B), Biology (B), and Physics (B) 				"
         "10 GCSEs at A*-C including Chemistry, Maths, and English")
 
-# This should save file in same file directory as python file
+
+# This will save file in same file directory as python file
 document.save(join(dirname(abspath(__file__)), "Kin Lon Choi.docx"))
