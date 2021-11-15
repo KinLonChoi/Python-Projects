@@ -58,7 +58,7 @@ class Format:
         self.name = name
         self.github = github
         # Name and link to GitHub front page is centered
-        title = document.add_heading(name, level=1).alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
+        document.add_heading(name, level=1).alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
         paragraph = document.add_paragraph("GitHub: ")
         add_hyperlink(paragraph, github, github)
         paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
