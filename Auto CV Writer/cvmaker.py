@@ -1,10 +1,12 @@
-from docx.shared import Pt
 import docx
-from hyperlink import add_hyperlink
-from docx.oxml.ns import qn
-from os.path import abspath, dirname, join
-from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 from docx.enum.style import WD_STYLE_TYPE
+from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
+from docx.oxml.ns import qn
+from docx.shared import Pt
+from hyperlink import add_hyperlink
+from os.path import abspath, dirname, join
+
+
 
 lines = []
 print("Paste job description here and type exit when finished:")
@@ -53,16 +55,20 @@ style.size = Pt(10)
 paragraph_format = document.styles['info'].paragraph_format
 paragraph_format.space_after = Pt(0)
 
+
 class Format:
     def __init__(self, name, github):
         self.name = name
         self.github = github
         # Name and link to GitHub front page is centered
         document.add_heading(name, level=1).alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
-        paragraph = document.add_paragraph("GitHub: ")
+        email = document.add_paragraph("Email: ", style='info')
+        add_hyperlink(email, "kinlonchoi@gmail.com", "kinlonchoi@gmail.com")
+        document.add_paragraph("Mobile: 07712636191", style='info').alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
+        paragraph = document.add_paragraph("GitHub: ", style='info')
         add_hyperlink(paragraph, github, github)
+        email.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
         paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
-        paragraph.style = document.styles['info']
 
     # The following three functions are made to improve readability of code
     # This is the font used for titles
@@ -109,9 +115,7 @@ cv.para("I am a highly motivated individual with six years of experience in the 
 # Skills section add dictionary definition for each key words(search terms) with value(skills) to add as bullet point
 cv.title("Skills")
 
-# site = document.add_paragraph("GitHub website:", style='List Bullet')
-# add_hyperlink(site, "https://kinlonchoi.github.io/Portfolio/index.html",
-#               "https://kinlonchoi.github.io/Portfolio/index.html")
+
 # Words to be searched for in job description
 web = dict.fromkeys(['front', 'html', 'css', 'web', 'full'],
                     # if term is found print above as bullet point
