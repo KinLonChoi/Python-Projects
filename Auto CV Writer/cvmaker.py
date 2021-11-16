@@ -7,7 +7,6 @@ from hyperlink import add_hyperlink
 from os.path import abspath, dirname, join
 
 
-
 lines = []
 print("Paste job description here and type exit when finished:")
 while True:
@@ -17,7 +16,8 @@ while True:
     else:
         break
 job_desc = ('\n'.join(lines)).lower()
-
+excluded = docx.Document()
+excluded.save("Excluded.docx")
 document = docx.Document()
 document.save("Kin Lon Choi.docx")
 
@@ -54,6 +54,11 @@ style.name = 'Arial'
 style.size = Pt(10)
 paragraph_format = document.styles['info'].paragraph_format
 paragraph_format.space_after = Pt(0)
+
+# Style for excluded paragraph font
+style = excluded.styles['Normal'].font
+style.name = 'Arial'
+style.size = Pt(12)
 
 
 class Format:
@@ -101,6 +106,8 @@ class Format:
                 elif k in job_desc:
                     self.bullet(v)
                     break
+                elif k in list(items)[-1]:
+                    excluded.add_paragraph(v, style='List Bullet')
                 else:
                     continue
 
@@ -212,3 +219,4 @@ cv.para("2003-2011		The Bromfords School, Essex 								"
 
 # This will save file in same file directory as python file
 document.save(join(dirname(abspath(__file__)), "Kin Lon Choi.docx"))
+excluded.save(join(dirname(abspath(__file__)), "Excluded.docx"))
