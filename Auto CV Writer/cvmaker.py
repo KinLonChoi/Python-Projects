@@ -114,10 +114,10 @@ class Format:
 
 cv = Format("Kin Lon Choi", "https://github.com/KinLonChoi")
 cv.para("")
-cv.para("I am a highly motivated individual with six years of experience in the science industry looking"
-        " for a career change to pursue my interest in programming. "
-        "I have self-taught knowledge of coding in both front and backend languages. "
-        "I am keen to develop new skills required to become an integral part of a software team.")
+cv.para("I am a highly motivated individual with six years of experience in the science industry looking for a career "
+        "change to pursue my passion in programming. In my spare time, I have taught myself knowledge of coding in both"
+        " front and backend languages. I am keen to learn and develop any skills required to start a career in software"
+        " and put existing and newly acquired skills to the test.")
 
 # Skills section add dictionary definition for each key words(search terms) with value(skills) to add as bullet point
 cv.title("Skills")
@@ -132,7 +132,7 @@ back = dict.fromkeys(['python', 'js', 'javascript', 'back', 'full'],
                      "Working knowledge of backend languages JavaScript and Python. ")
 # Some search terms are shortened to match variations of words e.g. analy will match analytical, analysis etc.
 sql = dict.fromkeys(['sql', 'data', 'dbms', 'analy'],
-                    "SQL knowledge using Database Management Software SQLite.")
+                    "Knowledge of SQL using Database Management Software SQLite.")
 
 algo = dict.fromkeys(['algo', 'data structure', 'sdlc', 'lifecycle', 'paradigm'],
                      "Familiar with programming paradigms such as algorithms, data structures and software development "
