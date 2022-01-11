@@ -70,7 +70,7 @@ class Format:
         email = document.add_paragraph("Email: ", style='info')
         add_hyperlink(email, "kinlonchoi@gmail.com", "kinlonchoi@gmail.com")
         document.add_paragraph("Mobile: 07712636191", style='info').alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
-        paragraph = document.add_paragraph("GitHub: ", style='info')
+        paragraph = document.add_paragraph("Website: ", style='info')
         add_hyperlink(paragraph, github, github)
         email.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
         paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
@@ -107,7 +107,7 @@ class Format:
                     continue
 
 
-cv = Format("Michael Choi", "https://github.com/KinLonChoi")
+cv = Format("Michael Choi", "https://kinlonchoi.github.io/Data-Portfolio/index.html")
 cv.para("")
 google_cert = document.add_paragraph("I am a highly motivated individual with over five years of experience in the science industry looking for a"
                                       " career change to pursue my passion for data analytics. I am passionate about data and its application and"
