@@ -1,3 +1,5 @@
+# Be sure to import python-docx using pip install and not built in install of docx modules cannot coexist as they both
+# have the root module name of docx
 import docx
 from docx.enum.style import WD_STYLE_TYPE
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
@@ -5,7 +7,8 @@ from docx.oxml.ns import qn
 from docx.shared import Pt
 from hyperlink import add_hyperlink
 from os.path import abspath, dirname, join
-
+from docx.shared import Inches
+from docx.enum.text import WD_LINE_SPACING
 
 lines = []
 print("Paste job description here and type exit when finished:")
@@ -19,6 +22,13 @@ job_desc = ('\n'.join(lines)).lower()
 excluded = docx.Document()
 excluded.save("Excluded.docx")
 document = docx.Document()
+# change margins to 1 inch
+sections = document.sections
+for section in sections:
+    section.top_margin = Inches(1)
+    section.right_margin = Inches(1)
+    section.bottom_margin = Inches(1)
+    section.left_margin = Inches(1)
 document.save("Michael Choi.docx")
 
 # Style for Heading 1
@@ -92,7 +102,7 @@ class Format:
     def scan(self, words_lists):
         for items in words_lists:
             for k, v in items:
-                if k in ('python', 'js', 'javascript', 'back', 'full'):
+                if k in ('python', 'R', 'program'):
                     p = document.add_paragraph(v, style='List Bullet')
                     add_hyperlink(p,
                                   "CV Automation tool.",
@@ -108,7 +118,7 @@ class Format:
 
 
 cv = Format("Michael Choi", "https://kinlonchoi.github.io/Data-Portfolio/index.html")
-cv.para("")
+cv.title("Personal Profile")
 google_cert = document.add_paragraph("I am a highly motivated individual with over five years of experience in the science industry looking for a"
                                       " career change to pursue my passion for data analytics. I am passionate about data and its application and"
                                       " have recently earned the ")
@@ -120,7 +130,7 @@ cv.title("Skills")
 
 
 # Words to be searched for in job description
-code = dict.fromkeys(['python', 'R', 'full'],
+code = dict.fromkeys(['python', 'R', 'program'],
                      "Proficient with using Python and basic skills in R. Project: ")
 # Some search terms are shortened to match variations of words e.g. analy will match analytical, analysis etc.
 sql = dict.fromkeys(['sql', 'data', 'dbms', 'analy'],
@@ -141,7 +151,7 @@ cv.scan(skill_list)
 
 # Employment section same as before add dictionary definitions for search terms.
 cv.title("Employment")
-cv.para("Sept 2016 – Sept 2021               Tate & Lyle PLC	             Laboratory Analyst")
+cv.para("Sept 2016 – Sept 2021			       Tate & Lyle PLC				Quality Analyst")
 
 special = dict.fromkeys(['detail', 'standard', 'require', 'product'],
                         "Excellent attention to detail in ensuring products meets the required standards.")
@@ -160,7 +170,7 @@ cv.para("Key achievements:")
 cv.bullet("Automation of report process that saves 6 hours every week.")
 cv.bullet("Created pivot tables that extract data from the SAP database for annual reports.")
 
-cv.para("Feb 2016 – Sept 2016                Tate & Lyle PLC                      Research scientist")
+cv.para("Feb 2016 – Sept 2016			      Tate & Lyle PLC			           Research scientist")
 
 plan = dict.fromkeys(['organ', 'improve', 'projects', 'plan', 'continuous'],
                      "Organised new product development and continuous improvement (CI) projects.")
@@ -182,22 +192,27 @@ cv.title("Education and Certification")
 date = document.add_paragraph("06/01/2022		", style='Normal')
 add_hyperlink(date, "Google Data Analytics Professional Certificate by Google (Coursera)",
               "https://www.coursera.org/account/accomplishments/certificate/ZCNSEFJ3GN6V")
+date.paragraph_format.space_before = 0
+date.paragraph_format.space_after = 0
 
 date = document.add_paragraph("07/11/2021		", style='Normal')
 add_hyperlink(date, "SQL for Data Science by University of California, Davis (Coursera)",
               "https://www.coursera.org/account/accomplishments/certificate/SYPGFMFPK3YA")
+date.paragraph_format.space_before = 0
+date.paragraph_format.space_after = 0
 
 date = document.add_paragraph("04/11/2021		", style='Normal')
 add_hyperlink(date, "Python for Everybody by University of Michigan (Coursera)",
               "https://www.coursera.org/account/accomplishments/specialization/certificate/DK3WDTXK4ND4")
+date.paragraph_format.space_before = 0
+date.paragraph_format.space_after = 0
 
-cv.para("")
+cv.para("2011-2015		MChem (Hons) in Chemistry (2:1) 		                        					    	University of Leicester")
 
-cv.para("2011-2015		MChem (Hons) in Chemistry (2:1) 		                        					University of Leicester")
-
-cv.para("2003-2011		The Bromfords School, Essex 								"
-        "               A-Levels in Chemistry (B), Biology (B), and Physics (B) 				              "
-        "               10 GCSEs at A*-C including Chemistry, Maths, and English")
+# GCSE and A Levels might not be required
+# cv.para("2003-2011		The Bromfords School, Essex 								"
+#         "               A-Levels in Chemistry (B), Biology (B), and Physics (B) 				              "
+#         "               10 GCSEs at A*-C including Chemistry, Maths, and English")
 
 # This will save file in same file directory as python file
 document.save(join(dirname(abspath(__file__)), "Michael Choi.docx"))

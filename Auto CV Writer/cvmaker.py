@@ -6,7 +6,6 @@ from docx.shared import Pt
 from hyperlink import add_hyperlink
 from os.path import abspath, dirname, join
 
-
 lines = []
 print("Paste job description here and type exit when finished:")
 while True:
@@ -135,7 +134,7 @@ back = dict.fromkeys(['python', 'js', 'javascript', 'back', 'full'],
                      "Working knowledge of backend languages JavaScript and Python. ")
 # Some search terms are shortened to match variations of words e.g. analy will match analytical, analysis etc.
 sql = dict.fromkeys(['sql', 'data', 'dbms', 'analy'],
-                    "Knowledge of SQL using Database Management Software SQLite.")
+                    "Knowledge of SQL using Database Management System SQLite.")
 
 algo = dict.fromkeys(['algo', 'data structure', 'sdlc', 'lifecycle', 'paradigm'],
                      "Familiar with programming paradigms such as algorithms, data structures and software development "
